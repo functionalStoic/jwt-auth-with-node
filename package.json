@@ -1,0 +1,13 @@
+{
+  "name": "jwt-auth-with-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "JasonSooter <jason.sooter@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0"
+  }
+}
