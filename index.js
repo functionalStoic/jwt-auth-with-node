@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
@@ -10,10 +11,30 @@ const users = [
 
 app.use(bodyParser.json());
 
-app.post('/login', (req, res) => {
-  const user = req.body.username;
+app.post('/login', ({ body: { username, password } }, res) => {
+  if (!username || !password) {
+    res.status(400).send('You need a username and password');
+    return;
+  }
+  const user = users.find(
+    u => u.username === username && u.password === password
+  );
 
-  res.status(200).send(`You logged in with ${user}`);
+  if (!user) {
+    res.status(401).send('User not found');
+    return;
+  }
+
+  const access_token = jwt.sign(
+    {
+      sub: user.id,
+      username
+    },
+    'mysupersecretkey',
+    { expiresIn: '3 hours' }
+  );
+
+  res.status(200).send({ access_token });
 });
 
 app.get('/status', (req, res) => {
