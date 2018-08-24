@@ -5,12 +5,13 @@
   "author": "JasonSooter <jason.sooter@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3"
   },
   "devDependencies": {
     "eslint": "^5.4.0"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index"
   }
 }
